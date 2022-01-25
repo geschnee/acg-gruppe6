@@ -16,7 +16,7 @@ default_circular: False
 default_clockwise: False
 
 # the amount of files of a configuration to be analysed
-default_size: 20
+default_size: 20000
 
 
 config_sets:
@@ -24,47 +24,51 @@ config_sets:
     n: 6
     circular: true
     clockwise: true
-  #- set_name: medium_circular_clockwise
-  #  n: 7
-  #  circular: true
-  #  clockwise: true
-  #- set_name: big_circular_clockwise
-  #  n: 8
-  #  circular: true
-  #  clockwise: true
+  - set_name: medium_circular_clockwise
+    n: 7
+    circular: true
+    clockwise: true
+  - set_name: big_circular_clockwise
+    n: 8
+    circular: true
+    clockwise: true
+    size: 100  
   - set_name: small_noncircular_clockwise
     n: 6
     circular: false
     clockwise: true
-  #- set_name: medium_noncircular_clockwise
-  #  n: 7
-  #  circular: false
-  #  clockwise: true
-  #- set_name: big_noncircular_clockwise
-  #  n: 8
-  #  circular: false
-  #  clockwise: true
-  #- set_name: small_noncircular_nonclockwise
-  #  n: 6
-  #  circular: false
-  #  clockwise: false
-  #- set_name: medium_noncircular_nonclockwise
-  #  n: 7
-  #  circular: false
-  #  clockwise: false
-  #- set_name: big_noncircular_nonclockwise
-  #  n: 8
-  #  circular: false
-  #  clockwise: false
-  #- set_name: small_circular_nonclockwise
-  #  n: 6
-  #  circular: true
-  #  clockwise: false
-  #- set_name: medium_circular_nonclockwise
-  #  n: 7
-  #  circular: true
-  #  clockwise: false
-  #- set_name: big_circular_nonclockwise
-  #  n: 8
-  #  circular: true
-  #  clockwise: false              
+  - set_name: medium_noncircular_clockwise
+    n: 7
+    circular: false
+    clockwise: true
+  - set_name: big_noncircular_clockwise
+    n: 8
+    circular: false
+    clockwise: true
+    size: 100  
+  - set_name: small_noncircular_nonclockwise
+    n: 6
+    circular: false
+    clockwise: false
+  - set_name: medium_noncircular_nonclockwise
+    n: 7
+    circular: false
+    clockwise: false
+  - set_name: big_noncircular_nonclockwise
+    n: 8
+    circular: false
+    clockwise: false
+    size: 100  
+  - set_name: small_circular_nonclockwise
+    n: 6
+    circular: true
+    clockwise: false
+  - set_name: medium_circular_nonclockwise
+    n: 7
+    circular: true
+    clockwise: false
+  - set_name: big_circular_nonclockwise
+    n: 8
+    circular: true
+    clockwise: false
+    size: 100              
