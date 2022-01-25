@@ -1,0 +1,19 @@
+Algorithm: spike
+Average Number of co-optimal solutions: 3.0063
+Average duration time: 0.08881945106983184
+Average of random 4-Leaf Maps Matching the Simulation: 0.1639
+Count path distribution:
+  0: 1474
+  2: 651
+  3: 10264
+  5: 7605
+  7: 6
+Files analysed: 20000
+Percentage of 4-Leaf Maps Matching Simulation: 16.250857142856958 %
+Percentage of common triples: 52.6325%
+Percentage of correctly classified R-Maps: 92.63 %
+Percentage of failed recognitions: 7.37%
+Simulation N: 6
+Simulation circular: true
+Simulation clockwise: false
+Total time elapsed: 1776.389021396637

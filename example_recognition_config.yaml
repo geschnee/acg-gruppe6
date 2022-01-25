@@ -1,0 +1,19 @@
+---
+
+# launch recognition.py and pass a file like this as input, this file will be used by default
+# example launch from command line:
+# python recognition.py example_recognition_config.yaml
+
+
+# Include a simple mechanism to change parameters and methods of the recognition algorithm. 
+# Modifications implemented in the following workpackages should be available as parameter switches or separate methods 
+# without e.g. commenting in/out code parts in the recognition algorithm.
+
+# algorithms can be commented in, to be skipped
+
+skip_algorithms:
+  #- spike
+
+#the dataset folder
+dataset_folder: datasets/example_dataset
+result_folder: results/example_recognition

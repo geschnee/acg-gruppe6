@@ -1,0 +1,70 @@
+---
+
+
+#general parameters
+dataset_name: datasets/example_dataset
+
+logfile: logfile.log
+
+#the four parameters of the simulate() function
+#see parameters here: https://github.com/david-schaller/Erdbeermet/blob/main/src/erdbeermet/simulation.py#L252-L267
+
+#default parameters, they can be overwritten in config_sets below
+default_branching_prob: 0.0
+default_n: 6
+default_circular: False
+default_clockwise: False
+
+# the amount of files of a configuration to be analysed
+default_size: 20
+
+
+config_sets:
+  - set_name: small_circular_clockwise
+    n: 6
+    circular: true
+    clockwise: true
+  #- set_name: medium_circular_clockwise
+  #  n: 7
+  #  circular: true
+  #  clockwise: true
+  #- set_name: big_circular_clockwise
+  #  n: 8
+  #  circular: true
+  #  clockwise: true
+  - set_name: small_noncircular_clockwise
+    n: 6
+    circular: false
+    clockwise: true
+  #- set_name: medium_noncircular_clockwise
+  #  n: 7
+  #  circular: false
+  #  clockwise: true
+  #- set_name: big_noncircular_clockwise
+  #  n: 8
+  #  circular: false
+  #  clockwise: true
+  #- set_name: small_noncircular_nonclockwise
+  #  n: 6
+  #  circular: false
+  #  clockwise: false
+  #- set_name: medium_noncircular_nonclockwise
+  #  n: 7
+  #  circular: false
+  #  clockwise: false
+  #- set_name: big_noncircular_nonclockwise
+  #  n: 8
+  #  circular: false
+  #  clockwise: false
+  #- set_name: small_circular_nonclockwise
+  #  n: 6
+  #  circular: true
+  #  clockwise: false
+  #- set_name: medium_circular_nonclockwise
+  #  n: 7
+  #  circular: true
+  #  clockwise: false
+  #- set_name: big_circular_nonclockwise
+  #  n: 8
+  #  circular: true
+  #  clockwise: false              

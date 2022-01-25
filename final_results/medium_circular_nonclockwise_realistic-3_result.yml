@@ -1,0 +1,17 @@
+Algorithm: realistic-3
+Average Number of co-optimal solutions: 1.38935
+Average duration time: 0.2541214325070381
+Average of random 4-Leaf Maps Matching the Simulation: 0.14655
+Count path distribution:
+  1: 8817
+  2: 11181
+  3: 2
+Files analysed: 20000
+Percentage of 4-Leaf Maps Matching Simulation: 14.599166666666669 %
+Percentage of common triples: 64.78166666666678%
+Percentage of correctly classified R-Maps: 100.0 %
+Percentage of failed recognitions: 0.0%
+Simulation N: 7
+Simulation circular: true
+Simulation clockwise: false
+Total time elapsed: 5082.428650140762
