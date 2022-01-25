@@ -408,10 +408,8 @@ def XLeafMapMatchesSummary(raw_results):
                 variable = l["Average of random 4-Leaf Maps Matching the Simulation"]
                 newalgo.append(variable)
             algos.append(newalgo)
-<<<<<<< HEAD
+
             print(f'----------------{newalgo}')
-=======
->>>>>>> 86c68e3fe3f6e2d5b68bc8a29c295fb9c7836e49
 
         x = np.arange(4)  # the label locations
         labels = ['circular\nclockwise', 'circular\nnonclockwise', 'noncircular\nclockwise',
@@ -427,14 +425,16 @@ def XLeafMapMatchesSummary(raw_results):
         rects5 = ax.bar(x + 3 * width / 2, algos[4], width, label='reserve-4')
         rects6 = ax.bar(x + 5 * width / 2, algos[5], width, label='spike')
 
-<<<<<<< HEAD
+
+        # TODO which one of these two is correct?
         ax.set_ylabel('%')
-        ax.set_title('Average of random 4-Leaf Map Matches Simulation\nN=' + str(count + 1))
-=======
         ax.set_ylabel('Absolute matched Number')
+        TODO eins der beiden ax.set_ylabel aussuchen und dann hier meinen Satz loeschen
+
+        
         ax.set_title(
             'Average of random 4-Leaf-Map matches Simulation\nN=' + str(count + 1))
->>>>>>> 86c68e3fe3f6e2d5b68bc8a29c295fb9c7836e49
+
         count += 1
         ax.set_xticks(x, labels)
         ax.legend(loc=1, prop={'size': 7})
@@ -471,16 +471,8 @@ if __name__ == '__main__':
     # TODO do some analysises here
     # e.g. runtime for one dataset comparing the different algorithms
 
-<<<<<<< HEAD
-    #percentageCorrectlyClassified(raw_results)
+    percentageCorrectlyClassified(raw_results)
     countPathDistribution(raw_results)
-    #failureSummary(raw_results)
-    #XLeafMapMatchesSummary(raw_results)
-    #Percentage4LeafMapMatchesSummary(raw_results)
-=======
-    # percentageCorrectlyClassified(raw_results)
-    # countPathDistribution(raw_results)
-    # failureSummary(raw_results)
+    failureSummary(raw_results)
     XLeafMapMatchesSummary(raw_results)
-    # Percentage4LeafMapMatchesSummary(raw_results)
->>>>>>> 86c68e3fe3f6e2d5b68bc8a29c295fb9c7836e49
+    Percentage4LeafMapMatchesSummary(raw_results)
