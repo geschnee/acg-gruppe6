@@ -1,4 +1,3 @@
-from turtle import color
 import yaml
 import os
 import numpy as np
@@ -11,9 +10,8 @@ colormap = {0: "red", 1: "limegreen", 2: "yellow", 3: "orange", 4: "orange", 5: 
 
 def readResults():
     results = list()
-    directory = "final_results"  # os.path.join('results', 'benchmark')
+    directory = "final_results"
     for file in os.listdir(directory):
-        # TODO only if file ends with yml
         if not file.endswith(".yml"):
             continue
 
@@ -667,33 +665,8 @@ if __name__ == '__main__':
     if not os.path.isdir(folder_path):
         os.makedirs(folder_path)
 
-    raw_results = readResults()
+    raw_results = readResults() # from final_results folder
 
-    for element in raw_results:
-        print(element)
-
-    n_6 = filterN(raw_results, 6)
-
-    print(f'N=6 ({len(n_6)} files)')
-    # for element in n_6:
-    #    print(element)
-
-    clockwise_results = filterClockwise(raw_results, True)
-
-    print(f'Clockwise True ({len(clockwise_results)} files)')
-    # for element in clockwise_results:
-    #    print(element)
-
-    n6_clockwise = filterClockwise(n_6, True)
-    print(f'Clockwise True and n=6 ({len(n6_clockwise)} files)')
-    # for element in n6_clockwise:
-    #    print(element)
-
-    base_algo = filterAlgorithm(raw_results, "base")
-    print(f'Base algo ({len(base_algo)} files)')
-
-    # TODO do some analysises here
-    # e.g. runtime for one dataset comparing the different algorithms
 
     percentageCorrectlyClassified(raw_results, folder_path)
     countPathDistribution(raw_results)

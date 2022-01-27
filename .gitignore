@@ -16,6 +16,7 @@ nohup.out
 build/
 .idea/
 .vscode/
+result_plots/
 
 # C extensions
 *.so
