@@ -250,7 +250,7 @@ def percentageCorrectlyClassified(raw_results, folder_path):
         ax.bar_label(r, fmt='%.0f', padding=3)
 
     fig.tight_layout()
-    plt.savefig(os.path.join(folder_path, 'correctly_classified.png'), dpi=200)
+    # plt.savefig(os.path.join(folder_path, 'correctly_classified.png'), dpi=200)
     plt.show()
 
 
@@ -557,7 +557,12 @@ def common_triples_plot(folder_name, folder_path, size_parameter = 'small'):
     ax.set_title('Percentage of common triplets by parameters and Algorithm')
     ax.set_xticks(x, labels)
     ax.legend(loc = 4, prop={'size': 7})
-    plt.savefig(os.path.join(folder_path, 'commontriples_' + size_parameter + '.png'), dpi = 200)
+    if size_parameter == 'small':
+        plt.savefig(os.path.join(folder_path, 'commontriples_N6' + '.png'), dpi=200)
+    elif size_parameter == 'medium':
+        plt.savefig(os.path.join(folder_path, 'commontriples_N7' + '.png'), dpi=200)
+    elif size_parameter == 'big':
+        plt.savefig(os.path.join(folder_path, 'commontriples_N8' + '.png'), dpi=200)
     plt.show()
 
 def co_optimal_plot(folder_name, folder_path, size_parameter = 'small'):
@@ -599,7 +604,12 @@ def co_optimal_plot(folder_name, folder_path, size_parameter = 'small'):
     ax.set_title('Average number of co-optimal solutions')
     ax.set_xticks(x, labels)
     ax.legend(loc=1, prop={'size': 7})
-    plt.savefig(os.path.join(folder_path, 'cooptimal_' + size_parameter + '.png'), dpi = 200)
+    if size_parameter == 'small':
+        plt.savefig(os.path.join(folder_path, 'cooptimal_N6' + '.png'), dpi=200)
+    elif size_parameter == 'medium':
+        plt.savefig(os.path.join(folder_path, 'cooptimal_N7' + '.png'), dpi=200)
+    elif size_parameter == 'big':
+        plt.savefig(os.path.join(folder_path, 'cooptimal_N8' + '.png'), dpi=200)
     plt.show()
 
 def runtime_plot(folder_name, folder_path, size_parameter = 'small'):
@@ -641,7 +651,12 @@ def runtime_plot(folder_name, folder_path, size_parameter = 'small'):
     ax.set_title('Average duration time per hfile')
     ax.set_xticks(x, labels)
     ax.legend(loc=2, prop={'size': 7})
-    plt.savefig(os.path.join(folder_path, 'runtime_' + size_parameter + '.png'), dpi = 200)
+    if size_parameter == 'small':
+        plt.savefig(os.path.join(folder_path, 'runtime_N6' + '.png'), dpi = 200)
+    elif size_parameter == 'medium':
+        plt.savefig(os.path.join(folder_path, 'runtime_N7' + '.png'), dpi=200)
+    elif size_parameter == 'big':
+        plt.savefig(os.path.join(folder_path, 'runtime_N8' + '.png'), dpi=200)
     plt.show()
 
 

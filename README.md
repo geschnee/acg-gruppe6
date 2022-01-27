@@ -97,3 +97,35 @@ nohup causes the output to be placed in a nohup.out file
 * [Erdbeermet Repo](https://github.com/david-schaller/Erdbeermet#generation-of-scenarios)
 * [ACG-gruppe6](https://github.com/geschnee/acg-gruppe6)
 * [Praktikumsdokumente](http://silo.bioinf.uni-leipzig.de/GTPraktikumRMaps/)
+
+
+# how to use
+- Install Erdbeermet package 
+- Install requirements.txt
+- generate Dataset
+  - in example_dataset_generate_config.yaml under config_sets adjust
+    1. foldername ("set_name:")
+    2. number of generated nodes ("n:")
+    3. circularity or non-circularity
+    4. clockwise or non clockwise
+    5. amount of files generated for one config ("size:")
+  - either for each configuration or as default parameters
+  - run generate_dataset.py
+
+
+- choose algorithm for recognition
+  - in example_recognition_config.yaml:
+    1. base for original algorithm
+    2. spike for modified for spike lengths
+    3. reserve-3 for first 3 nodes fixed correctly
+    4. reserve-4 for first 4 nodes fixed correctly
+    5. realistic-3 for first 3 nodes fixed randomly
+    6. realistic-4 for first 4 nodes fixed randomly
+    - plus adjust dataset path and result folder
+
+
+- run recognition_pipeline.py
+
+- to get result-plots:
+  - run analyse_results.py
+
