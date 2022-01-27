@@ -1,5 +1,4 @@
 from itertools import permutations
-from os import read
 import sys
 import yaml
 import glob
@@ -109,7 +108,7 @@ def traverseTree(node, sequence, paths):
 
 
 def traversalToRstepSequences(forwardPath):
-    # transforms a traversal (root to leaf)
+    # transforms a traversal of the recognition tree (root to leaf)
     # into a sequence of r-steps ("going" from leaf to root of recognition tree)
 
     forwardPath.reverse()  # reverse initial order (initial order is from root to leaf)
@@ -160,18 +159,18 @@ def getValidRStepSequences(recognition_tree):
     return r_step_sequences
 
 
-def xLeafMapMatchesSimulation(reconstructed_r_step_sequences, x=4):
+def xLeafMapMatchesSimulation(reconstructed_r_step_sequence, x=4):
     # Purpose of this method:
     # • Classify whether the final 4-leaf map after recognition matches the first 4 leaves of the simulation.
 
     # Explain Datatypes
-    # reconstructed_r_step_sequences is a green path of the erdbeermet recognition
-    # reconstructed_r_step_sequences[0] is the leaf node of a recognition_tree
+    # reconstructed_r_step_sequence is a green path of the erdbeermet recognition
+    # reconstructed_r_step_sequence[0] is the leaf node of a recognition_tree
     # leaf_node_of_path
     # reconstructed_r_step_sequences[0] contains a list of 4 nodes
     # the 4 nodes are the final x-leaf map after recognition
 
-    leaf_node_of_path = reconstructed_r_step_sequences[0]
+    leaf_node_of_path = reconstructed_r_step_sequence[0]
     recognition_leafs = leaf_node_of_path["V"]
 
     # abuse the ordering
@@ -181,18 +180,10 @@ def xLeafMapMatchesSimulation(reconstructed_r_step_sequences, x=4):
             return False
 
     # ask how should we compare these?
-    # just check if the first x nodes of simulation_r_step_sequences are in reconstructed_r_step_sequences[0]?
+    # just check if the first x nodes of simulation_r_step_sequences are in reconstructed_r_step_sequence[0]?
     # yes, that is correct
     # this would not check the ordering
     # probably this because we stop at 4 leaves and assume their ordering does not matter
-
-    return True
-
-
-def allXLeafMapMatchSimulation(reconstructed_r_step_sequences, x, simulation_r_step_sequences):
-    for seq in reconstructed_r_step_sequences:
-        if not xLeafMapMatchesSimulation(seq, x, simulation_r_step_sequences):
-            return False
 
     return True
 
@@ -482,6 +473,7 @@ def setupDirectoryForFailedRecognitions(config):
 
 def analyse(configfile):
     # this method tries the recognition of the folders in config["dataset_folder"]
+    # for each algorithm in config["recognition_algorithms"]
 
     # read config yaml file, return python dictionary (config)
     config = readConfigFile(configfile)
@@ -517,7 +509,7 @@ def analyseFolder(folder, config, algo):
     count_path = {}
 
     createDir(config["result_folder"])
-    createDir(os.path.join(config["result_folder"], folder))
+    #createDir(os.path.join(config["result_folder"], folder))
 
     results = []
     # results list contains the results of the individual anlysis
@@ -588,21 +580,12 @@ def analyseFolder(folder, config, algo):
     }
 
     # dick zum abspeichern,
-    createDir(os.path.join('results', 'benchmark'))
-    yaml_name = os.path.join('results', 'benchmark',
+    createDir(os.path.join(config["result_folder"], 'recognition_summaries'))
+    yaml_name = os.path.join(config["result_folder"], 'recognition_summaries',
                              f'{folder}_{algo}_result.yml')
 
     with open(yaml_name, 'w') as yaml_file:
         yaml.dump(d, yaml_file, default_flow_style=False)
-
-
-class Algorithm(Enum):
-    BASE = 'base'
-    RESERVE_3 = 'reserve-3'
-    RESERVE_4 = 'reserve-4'
-    REALISTIC_3 = 'realistic-3'
-    REALISTIC_4 = 'realistic-4'
-    BASE_SPIKE = 'spike'
 
 
 if __name__ == '__main__':
