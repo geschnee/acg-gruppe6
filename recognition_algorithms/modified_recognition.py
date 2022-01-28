@@ -480,7 +480,10 @@ def modified_recognize(D, B_set, first_candidate_only=False, print_info=False):
     tools.Tree
     """
 
-    # TODO modify this according to WP 3
+    # This is the recognition from WP 3
+    # B_set is the set of reserved nodes
+    # The realistic case is a method in the recognition_pipeline, where the permutations are generated.
+    # The B_set is used to skip all candidates, where z is in B_set
     
     n = D.shape[0]
     V = [i for i in range(n)]

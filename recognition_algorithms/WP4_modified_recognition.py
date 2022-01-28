@@ -391,6 +391,7 @@ def evaluateSpikes(vc1_spikes, vc2_spikes):
 
 
     # thus if a key exists for both candidates, we can compare them
+    # if they do not share a leaf, they are not compared with each other
     for shared_leaf in set(vc1_spikes.keys()).intersection(vc2_spikes.keys()):
         
         #common leafs should be compared, confirmed on 13.01. with lecturers
@@ -407,7 +408,6 @@ def evaluateSpikes(vc1_spikes, vc2_spikes):
     if (vc2_shorter):
         return "vc2_shorter"
     return "none"
-
 
     
 def computeMinimalCandidates(V, D, candidates):
@@ -459,6 +459,8 @@ def computeMinimalCandidates(V, D, candidates):
     
     # validCandidates should now only contain the smallest candidate(s)
     # that were not part of a circle
+
+    # validCandidates can now also be empty (if all were part of a cycle)
     return validCandidates
     
 
@@ -485,7 +487,7 @@ def spike_recognize(D, first_candidate_only=False, print_info=False):
     --------
     tools.Tree
     """
-    
+
     n = D.shape[0]
     V = [i for i in range(n)]
     
@@ -528,12 +530,11 @@ def spike_recognize(D, first_candidate_only=False, print_info=False):
 
                 # Find a candidate for which no other candidate is smaller.
                 minimal_candidates=computeMinimalCandidates(V, D, candidates)
-                
-                # If multiple such candidates exist, chose an
-                # arbitrary one of those.
 
                 print(f'minimal_candidates {minimal_candidates}')
                 if len(minimal_candidates)>1:
+                    # If multiple such candidates exist, chose an
+                    # arbitrary one of those.
                     filtered_candidates=[minimal_candidates[random.randrange(len(minimal_candidates))]]
                     minimal_found = True
                 elif len(minimal_candidates)==1:
@@ -541,11 +542,6 @@ def spike_recognize(D, first_candidate_only=False, print_info=False):
                     minimal_found = True
                 else:
                     filtered_candidates = []
-                    # TODO
-                    # we need to collect all the files, where the recognition fails
-                    # together with the corresponding configuration used to generate the file, see email 14.01. 
-                    # basically this case here, but has to be done in recognition_pipeline
-
                                     
                     # Infomail: Brechen Sie den Algorithmus nur ab wenn es keinen Minimalen 
                     # Kandidaten gibt, d.h. wenn alle Kandidaten in einem oder mehreren Kreis 
@@ -564,6 +560,7 @@ def spike_recognize(D, first_candidate_only=False, print_info=False):
                 print(f'-----> n = {n}, V = {V} ---> R-steps actually carried out')
 
             #continue the algorithm but only for the minimal candidate
+            #if not n > 5, the standard candidates are used
             for x, y, z, u_witness, alpha in filtered_candidates:
                 
                 V_copy = V.copy()
