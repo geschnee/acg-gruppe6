@@ -6,6 +6,7 @@
 - Clara Leidhold
 - Georg Schneeberger
 
+
 ## General info
 
 We have 3 important scripts.
@@ -16,6 +17,8 @@ We have 3 important scripts.
 We use YML files to configure the first 2 scripts.
 - example_dataset_generate_config.yaml is the default config used by generate_dataset.py
 - example_recognition_config.yaml is the default config used by recognition_pipeline.py
+
+The config files can be changed or another one can be passed as a command line argument.
 
 # how to use
 
@@ -54,16 +57,17 @@ We use YML files to configure the first 2 scripts.
 
 # Our evaluation metrics
 
-## Common Triples
-- given a path in a recognition tree and a simulation sequence gives intersection of common triples
-- in recognizeFile (recognition of h_file): choosing one path out of rec tree randomly - for this one do: 
-result_object[\'percent_of_c_t\'] = len(commonTriples(path, sim_sequence)) / (len(path) - 1) * 100))
-- len(path) - 1 because path includes empty element for stopping
-- in analyseFolder:
-common_triples_percentage = sum of result_object[\'percent_o_c_t\'] of every h-file
-- Final metric: Average common_triples_percentage on sum of history files
+Our recognition_pipeline.py summarises the results in yml files.
+Each of these yml files contains the results of one dataset (containing many simulation files generated with the same simulation parameters), analysed with one of our recognition algorithms. Dataset name and used algorithm are part of the yml file names, furthermore the exact details of simulation are also available in the yml files.
 
-##Number of Co-optimal Solutions
+
+## Common Triples
+- given a path in a recognition tree and a simulation sequence, Common Triples is the intersection of common triples of the r-steps
+- 
+- Final metric: Percentage of common triples
+    * the average of the percentage
+
+## Number of Co-optimal Solutions
 - in number_cooptimal_sol(array of paths): returns number of paths, which dont have ideal order
 - In recognizeFile:compute number of co-optimal solutions of all green paths of tree
 - result_object(number of cooptimal solutions) gives number of green paths in tree which arent ideal (absolute number)
@@ -76,40 +80,29 @@ common_triples_percentage = sum of result_object[\'percent_o_c_t\'] of every h-f
 
 # Run on server
 
-## copy repo to server
-scp -r graphen-verstehen/ gpraktikum06@k60.bioinf.uni-leipzig.de:/scratchsan/praktikum/gpraktikum06/repo/
-
-## connect to server
-
-ssh gpraktikum06@k60.bioinf.uni-leipzig.de
-
-## get Erdbeermet
-
-- git clone https://github.com/david-schaller/Erdbeermet
-- cd Erdbeermet
-- conda create --name bla python=3.9
-- conda activate bla
-- python setup.py install
-
-## prepare repo
-
-cd repo
-conda install -n acg pyyaml
-
-## now the repo is ready to be used
-
-## run a python script in background
-
-we need to be able to run the script in the background (so we can disconnect and the script continues)
-
-nohup python recognition-pipeline.py &
-
-nohup causes the output to be placed in a nohup.out file
-& causes the process to be running in the background
+1. copy repo to server
+    1. scp -r graphen-verstehen/ gpraktikum06@k60.bioinf.uni-leipzig.de:/scratchsan/praktikum/gpraktikum06/repo/
+2. connect to server
+    1. ssh gpraktikum06@k60.bioinf.uni-leipzig.de
+3. get Erdbeermet
+    * git clone https://github.com/david-schaller/Erdbeermet
+    * cd Erdbeermet
+    * conda create --name acg python=3.9
+    * conda activate acg
+    * python setup.py install
+4. prepare repo
+    * cd repo
+    * conda install -n acg pyyaml
+    * now the repo is ready to be used
+5. run a python script in background
+    * we need to be able to run the script in the background (so we can disconnect and the script continues)
+    * nohup python recognition-pipeline.py &
+    * nohup causes the output to be placed in a nohup.out file
+    * & causes the process to be running in the background
 
 # Links
 * [Erdbeermet Repo](https://github.com/david-schaller/Erdbeermet#generation-of-scenarios)
-* [ACG-gruppe6](https://github.com/geschnee/acg-gruppe6)
+* [ACG-gruppe6 Repo](https://github.com/geschnee/acg-gruppe6)
 * [Praktikumsdokumente](http://silo.bioinf.uni-leipzig.de/GTPraktikumRMaps/)
 
 

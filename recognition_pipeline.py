@@ -238,6 +238,8 @@ def commonTriples(reconstruction_sequence, simulation_sequence):
     # given a simulation with 6 nodes
     # the maximum number of common tripes is 2 (6-4)
 
+    # basically common triples only checks the r-steps in the recognition path, nodes in recognition leaf are not considered
+
     # a triple is x, y, z
     # x and y are the "parents"
     # z is their child
@@ -370,11 +372,20 @@ def recognizeFile(h_file, config, algo):
     # get distance matrix ("real" input for recognition) from history (Erdbeermet)
     d_matrix = original_scenario.D
 
+    #########################################
+    ## Recognition with the correct algorithm
+    #########################################
+
     ts_before = time.time()
     recognition_tree = get_recognition_tree(algo, d_matrix)
     ts_after = time.time()
     duration = ts_after - ts_before
     result_object["duration"] = duration
+
+
+    ###############################################
+    ## Analysis of the constructed recognition tree
+    ###############################################
 
     print(f'ts_before {ts_before}')
     print(f'ts_after {ts_after}')
@@ -394,15 +405,7 @@ def recognizeFile(h_file, config, algo):
         if xLeafMapMatchesSimulation(i):
             anzahl_matched_leaves += 1
 
-    if len(all_green_paths) > 0:
-        result_object["Percentage of 4 Leaves map matches simulation"] = (
-            anzahl_matched_leaves/len(all_green_paths))*100
-    else:
-        # no green path does 0 percentage 4 leave map matches -> always 0
-        result_object["Percentage of 4 Leaves map matches simulation"] = 0
-
     if recognitionSuccessful(recognition_tree):
-        #print(f'randomly determined Path {path}')
 
         random_path_matched = 0
         if xLeafMapMatchesSimulation(path):
@@ -417,6 +420,9 @@ def recognizeFile(h_file, config, algo):
             path, 3)
         result_object["final_four_matches_simulation"] = xLeafMapMatchesSimulation(
             path, 4)
+
+        result_object["Percentage of 4 Leaves map matches simulation"] = (
+            anzahl_matched_leaves/len(all_green_paths))*100
 
         # Measure divergence of the reconstructed steps from true steps of the simulation, e.g. by counting common triples.
         print(f'common triples {commonTriples(path, simulation_sequence)}')
@@ -442,6 +448,9 @@ def recognizeFile(h_file, config, algo):
         result_object["Recognition successful total"] = 0
 
         result_object["4_Leaves_matches_simulation_count"] = 0
+
+        # no green path does 0 percentage 4 leave map matches -> always 0
+        result_object["Percentage of 4 Leaves map matches simulation"] = 0
 
         # save the history file of the failed recognition
         backupFailedHistory(h_file, config, algo)
@@ -507,7 +516,7 @@ def countFailures(results):
 def analyseFolder(folder, config, algo):
     # analyses a folder like this one:
     # datasets/example_dataset/circular
-    global four_leaf_matches_simulation_test
+    
     history_files = getFilesToAnalyse(folder, config["dataset_folder"])
     sim_n, sim_circular, sim_clockwise = getSimulationParams(folder)
 
@@ -518,6 +527,7 @@ def analyseFolder(folder, config, algo):
 
     results = []
     # results list contains the results of the individual anlysis
+
     common_triples_count = 0
     common_triples_percentage = 0
     total_duration = 0
@@ -584,7 +594,7 @@ def analyseFolder(folder, config, algo):
         "Average Number of co-optimal solutions": number_of_co_optimal_solutions / len(history_files),
     }
 
-    # dick zum abspeichern,
+    # dictionary zum abspeichern,
     createDir(os.path.join(config["result_folder"], 'recognition_summaries'))
     yaml_name = os.path.join(config["result_folder"], 'recognition_summaries',
                              f'{folder}_{algo}_result.yml')
