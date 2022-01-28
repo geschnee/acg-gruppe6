@@ -7,7 +7,7 @@
 - Georg Schneeberger
 
 
-## General info
+# General info
 
 We have 3 important scripts.
 - generate_dataset.py
@@ -19,6 +19,10 @@ We use YML files to configure the first 2 scripts.
 - example_recognition_config.yaml is the default config used by recognition_pipeline.py
 
 The config files can be changed or another one can be passed as a command line argument.
+
+## Our Datasets
+
+Unsere finale Analyse, welche auch in der Presentation verwendet wurde befindet sich im Ordner final_results. Eine Readme in diesem Ordner beschreibt auch die Datensets weiter.
 
 # how to use
 
