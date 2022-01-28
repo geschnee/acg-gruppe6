@@ -64,22 +64,40 @@ Unsere finale Analyse, welche auch in der Presentation verwendet wurde befindet 
 Our recognition_pipeline.py summarises the results in yml files.
 Each of these yml files contains the results of one dataset (containing many simulation files generated with the same simulation parameters), analysed with one of our recognition algorithms. Dataset name and used algorithm are part of the yml file names, furthermore the exact details of simulation are also available in the yml files.
 
+Generally our metrics like "Common Triples" and others treat a failed recognition as the worst case for that metric. Meaning a failed recognition contributes to the average percentage of common triples with a 0%.
+
+## Percentage of correctly classified R-Maps / Percentage of failed recognitions
+- Percentage of correctly classified R-Maps measures the percentage of succesful recognitions over all the files analysed in a dataset for an algorithm.
+    - succesful recognition meaning the recognition returned a recognition tree with at leat 1 green path
+- Percentage of failed recognitions is simply the inverse of Percentage of correctly classified R-Maps (100% - Percentage of correctly classified R-Maps)
+
+## Average of random 4-Leaf Maps Matching the Simulation
+- Percentage of the randomly chosen green recognition path's leaf matching the first 4 leaves of simulation.
+- The percentage is computed over all recognitions of a dataset using one algorithm.
+
+## Percentage of 4-Leaf Maps Matching Simulation
+- Metric of 4-Leaf Maps Matching the Simulation, taking the average over all the green paths for one dataset and algorithm.
+
+## Count path distribution
+
+- Distribution of paths contains the counts of amounts of green paths after a recognition for one dataset and algorithm.
+- Meaning if a recognition returned a tree with 3 green paths, the count for 3 is increased by one.
+- A failed recognition increases the count for 0, since then there was no green path.
+
 
 ## Common Triples
 - given a path in a recognition tree and a simulation sequence, Common Triples is the intersection of common triples of the r-steps
-- 
+- the path of the recognition tree is chosen randomly (if multiple green ones exit)
 - Final metric: Percentage of common triples
     * the average of the percentage
 
 ## Number of Co-optimal Solutions
 - in number_cooptimal_sol(array of paths): returns number of paths, which dont have ideal order
-- In recognizeFile:compute number of co-optimal solutions of all green paths of tree
+- In recognizeFile: compute number of co-optimal solutions of all green paths of tree
 - result_object(number of cooptimal solutions) gives number of green paths in tree which arent ideal (absolute number)
 - In analyseFolder: number of co-optimal solutions are averaged over all history files
-
-## Percentage of failed recognitions
-- failed recognition == recognition tree has no green paths
-- percentage is computed over all the history files
+- Final metric: Average Number of co-optimal solutions
+    * the average of the amount of non optimal green paths in the recognition tree
 
 
 # Run on server
