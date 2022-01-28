@@ -250,8 +250,13 @@ def commonTriples(reconstruction_sequence, simulation_sequence):
     for r in reconstruction_sequence:
         if r["r-step"]:  # has an r-step
             r_step = r["r-step"]
-            recognition_r_steps.add(
-                f'({r_step[0]}, {r_step[1]}: {r_step[2]})')  # represent r-step as string like in history file
+
+            # the next line was included in our original cobe
+            # I just noticed this is a bug. However this bug will not have had any impact.
+            # The returned simulation_r_steps.intersection(recognition_r_steps) is not affected.
+            # recognition_r_steps.add(f'({r_step[0]}, {r_step[1]}: {r_step[2]})')  # represent r-step as string like in history file
+            # This added not needed entries to recognition_r_steps
+
 
             # bring parents in numerical order
             if r_step[0] <= r_step[1]:
