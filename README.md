@@ -103,7 +103,7 @@ Generally our metrics like "Common Triples" and others treat a failed recognitio
 # Run on server
 
 1. copy repo to server
-    1. scp -r graphen-verstehen/ gpraktikum06@k60.bioinf.uni-leipzig.de:/scratchsan/praktikum/gpraktikum06/repo/
+    1. scp -r acg-gruppe06/ gpraktikum06@k60.bioinf.uni-leipzig.de:/scratchsan/praktikum/gpraktikum06/repo/
 2. connect to server
     1. ssh gpraktikum06@k60.bioinf.uni-leipzig.de
 3. get Erdbeermet
